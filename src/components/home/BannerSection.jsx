@@ -35,14 +35,14 @@ export default function BannerSection() {
 
   if (!mounted) {
     return (
-      <section className="relative h-[260px] w-full bg-(--background) sm:h-[380px] md:h-[550px] lg:h-[620px]" />
+      <section className="relative h-65 w-full bg-background sm:h-95 md:h-137.5 lg:h-155" />
     );
   }
 
   const images = resolvedTheme === "dark" ? DARK_BANNERS : LIGHT_BANNERS;
 
   return (
-    <section className="relative h-[260px] w-full overflow-hidden bg-(--background) sm:h-[380px] md:h-[550px] lg:h-[620px]">
+    <section className="relative h-65 w-full overflow-hidden bg-background sm:h-95 md:h-137.5 lg:h-155">
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
