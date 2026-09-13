@@ -7,11 +7,13 @@ import PrivateEvents from "../home/PrivateEvents";
 import CustomerReviewsPage from "./CustomerReviewsPage";
 import ChefProfiles from "@/components/home/ChefProfiles";
 import Manu from "@/components/home/Manu";
+import StatsSection from "../home/StatsSection";
 
 export default function HomePage() {
   return (
     <>
       <BannerSection />;
+      <StatsSection/>
       <AboutRestaurant />
       <Manu />
       <CulinaryExperiences />
