@@ -6,16 +6,16 @@ import LocationContact from "@/components/home/LocationContact";
 import PrivateEvents from "../home/PrivateEvents";
 import CustomerReviewsPage from "./CustomerReviewsPage";
 import ChefProfiles from "@/components/home/ChefProfiles";
-import Manu from "@/components/home/Manu";
 import StatsSection from "../home/StatsSection";
+import CategoriesSection from "../categories/CategoriesSection";
 
 export default function HomePage() {
   return (
     <>
       <BannerSection />;
       <StatsSection/>
+      <CategoriesSection/>
       <AboutRestaurant />
-      <Manu />
       <CulinaryExperiences />
       <ChefProfiles />
       <MenuHighlights />
