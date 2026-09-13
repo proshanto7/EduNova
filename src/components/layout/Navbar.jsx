@@ -37,6 +37,7 @@ export default function Navbar() {
                 src={resolvedTheme === "dark" ? LogoDark : LogoLight}
                 alt="Logo"
                 fill
+                sizes="200px"
                 className="scale-150 object-contain object-left lg:scale-[1.8]"
                 priority
               />
@@ -135,7 +136,10 @@ export default function Navbar() {
               >
                 Register
               </Link>
-              <ShoppingCart size={18} className="ml-auto text-(--nav-icon-text)" />
+              <ShoppingCart
+                size={18}
+                className="ml-auto text-(--nav-icon-text)"
+              />
             </div>
           </div>
         </div>
