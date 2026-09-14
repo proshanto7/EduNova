@@ -4,6 +4,10 @@ import Mentor3 from "@/imports/mentors/3.jpg";
 import Mentor4 from "@/imports/mentors/4.jpg";
 import Mentor5 from "@/imports/mentors/5.jpg";
 import Mentor6 from "@/imports/mentors/6.jpg";
+import Mentor7 from "@/imports/mentors/7.jpg";
+import Mentor8 from "@/imports/mentors/2.jpg";
+import Mentor9 from "@/imports/mentors/5.jpg";
+import Mentor10 from "@/imports/mentors/3.jpg";
 
 export const MENTORS_DATA = [
   {
@@ -18,6 +22,7 @@ export const MENTORS_DATA = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
   },
+
   {
     slug: "tania-ahmed",
     name: "Tania Ahmed",
@@ -30,6 +35,7 @@ export const MENTORS_DATA = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
   },
+
   {
     slug: "farhan-kabir",
     name: "Farhan Kabir",
@@ -42,6 +48,7 @@ export const MENTORS_DATA = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
   },
+
   {
     slug: "nusrat-jahan",
     name: "Nusrat Jahan",
@@ -54,6 +61,7 @@ export const MENTORS_DATA = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
   },
+
   {
     slug: "kamal-hossain",
     name: "Kamal Hossain",
@@ -66,6 +74,7 @@ export const MENTORS_DATA = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
   },
+
   {
     slug: "sadia-rahman",
     name: "Sadia Rahman",
@@ -78,9 +87,68 @@ export const MENTORS_DATA = [
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com",
   },
+
+  // Mentor 7
+  {
+    slug: "mahin-chowdhury",
+    name: "Mahin Chowdhury",
+    title: "Data Science Instructor",
+    expertise: "Data Science",
+    image: Mentor7,
+    rating: 4.8,
+    students: "7,850",
+    bio: "Mahin is a data scientist with extensive experience working with machine learning and analytics. He helps students understand Python, data analysis, machine learning, and real-world data projects.",
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+  },
+
+  // Mentor 8
+  {
+    slug: "samira-hasan",
+    name: "Samira Hasan",
+    title: "Frontend Engineering Lead",
+    expertise: "Web Development",
+    image: Mentor8,
+    rating: 4.9,
+    students: "10,300",
+    bio: "Samira specializes in modern frontend development and scalable UI architecture. She teaches JavaScript, React, Next.js, TypeScript, and best practices for building production-ready applications.",
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+  },
+
+  // Mentor 9
+  {
+    slug: "arif-mahmud",
+    name: "Arif Mahmud",
+    title: "SEO & Growth Consultant",
+    expertise: "Marketing",
+    image: Mentor9,
+    rating: 4.7,
+    students: "6,950",
+    bio: "Arif helps businesses grow their online presence through SEO, content strategy, and organic growth. His mentorship focuses on practical strategies that produce measurable results.",
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+  },
+
+  // Mentor 10
+  {
+    slug: "mehedi-hasan",
+    name: "Mehedi Hasan",
+    title: "Cloud & DevOps Engineer",
+    expertise: "Cloud Computing",
+    image: Mentor10,
+    rating: 4.8,
+    students: "5,680",
+    bio: "Mehedi is a cloud and DevOps engineer focused on modern infrastructure and deployment workflows. He teaches AWS, Docker, CI/CD, cloud architecture, and production deployment practices.",
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+  },
 ];
 
 export function getMentorBySlug(slug) {
-  if (typeof slug !== "string" || slug.trim() === "") return null;
+  if (typeof slug !== "string" || slug.trim() === "") {
+    return null;
+  }
+
   return MENTORS_DATA.find((mentor) => mentor.slug === slug) ?? null;
 }

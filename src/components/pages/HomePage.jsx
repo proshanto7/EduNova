@@ -7,6 +7,7 @@ import ChefProfiles from "@/components/home/ChefProfiles";
 import StatsSection from "../home/StatsSection";
 import CategoriesSection from "../categories/CategoriesSection";
 import AboutSection from "../home/AboutSection";
+import MentorsSlider from "../home/MentorsSlider";
 
 export default function HomePage() {
   return (
@@ -15,6 +16,7 @@ export default function HomePage() {
       <StatsSection/>
       <CategoriesSection/>
       <AboutSection/>
+      <MentorsSlider/>
       <CulinaryExperiences />
       <ChefProfiles />
       <MenuHighlights />
