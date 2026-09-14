@@ -12,10 +12,10 @@ import LogoDark from "@/imports/logo-dark.png";
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Courses", href: "/courses" },
-  { label: "Pages", href: "/pages" },
+  { label: "About Us", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Shop", href: "/shop" },
+  { label: "Mentor", href: "/mentor" },
   { label: "Contact", href: "/contact" },
 ];
 

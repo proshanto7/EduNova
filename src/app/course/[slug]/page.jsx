@@ -45,7 +45,7 @@ export default async function CourseDetailsPage({ params }) {
   const category = getCategoryBySlug(course.categorySlug);
 
   return (
-    <main className="bg-(--background)">
+    <main className="bg-background">
       {/* Header */}
       <section className="border-b border-(--border) px-6 py-8">
         <div className="mx-auto max-w-5xl">
