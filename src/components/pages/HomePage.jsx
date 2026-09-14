@@ -1,5 +1,4 @@
 import BannerSection from "@/components/home/BannerSection";
-import AboutRestaurant from "@/components/home/AboutRestaurant";
 import MenuHighlights from "@/components/home/MenuHighlights";
 import CulinaryExperiences from "@/components/home/CulinaryExperiences";
 import LocationContact from "@/components/home/LocationContact";
@@ -8,6 +7,7 @@ import CustomerReviewsPage from "./CustomerReviewsPage";
 import ChefProfiles from "@/components/home/ChefProfiles";
 import StatsSection from "../home/StatsSection";
 import CategoriesSection from "../categories/CategoriesSection";
+import AboutSection from "../home/AboutSection";
 
 export default function HomePage() {
   return (
@@ -15,7 +15,7 @@ export default function HomePage() {
       <BannerSection />;
       <StatsSection/>
       <CategoriesSection/>
-      <AboutRestaurant />
+      <AboutSection/>
       <CulinaryExperiences />
       <ChefProfiles />
       <MenuHighlights />
