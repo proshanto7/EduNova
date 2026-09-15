@@ -1,9 +1,5 @@
-import Img1 from "@/imports/events (1).jpg"
-import Img2 from "@/imports/events (2).jpg"
-import Musk from "@/imports/musk.webp"
-import chefImage1 from "@/imports/chef-1.jpg";
-import chefImage2 from "@/imports/chef-2.jpg";
-import chefImage3 from "@/imports/chef-3.jpg";
+import { Search, PlayCircle, FileText, ShoppingCart } from "lucide-react";
+
 export const LOCATION_CONTACT_DATA = {
   header: {
     eyebrow: "LOCATION & CONTACT",
@@ -71,105 +67,6 @@ export const LOCATION_CONTACT_DATA = {
   },
 };
 
-export const PRIVATE_EVENTS_DATA = {
-  title: "Private Events & Hosting",
-
-  description:
-    "For the finest private events, contact our team to create an unforgettable experience tailored to your occasion.",
-
-  form: {
-    label: "Inquiry",
-    placeholder: "Share your event needs",
-    button: "INQUIRE",
-  },
-
-  images: [
-    {
-      src: Img1,
-      alt: "Private dining event",
-    },
-    {
-      src: Img2,
-      alt: "Private group dining event",
-    },
-  ],
-};
-export const CUSTOMER_REVIEWS_DATA = [
-  {
-    id: 1,
-    name: "Samantha Wilson",
-    role: "Food Enthusiast",
-    avatar: Musk,
-    rating: 5,
-    review:
-      "The experience was wonderful from start to finish. Every dish was beautifully prepared and full of flavor.",
-  },
-  {
-    id: 2,
-    name: "Michael Brown",
-    role: "Regular Guest",
-    avatar: Musk,
-    rating: 5,
-    review:
-      "The food was absolutely amazing and the service was excellent. Everything felt elegant and perfectly prepared.",
-  },
-  {
-    id: 3,
-    name: "Isabella Martinez",
-    role: "Food Lover",
-    avatar: Musk,
-    rating: 5,
-    review:
-      "A beautiful dining experience with incredible flavors and wonderful service. I would definitely come back.",
-  },
-  {
-    id: 4,
-    name: "Daniel Anderson",
-    role: "Guest",
-    avatar: Musk,
-    rating: 5,
-    review:
-      "One of the best restaurant experiences I have had. The atmosphere and attention to detail were exceptional.",
-  },
-  {
-    id: 5,
-    name: "Emily Johnson",
-    role: "Food Enthusiast",
-    avatar: Musk,
-    rating: 5,
-    review:
-      "Everything was perfect. Amazing food, beautiful presentation and an unforgettable atmosphere.",
-  },
-  {
-    id: 6,
-    name: "Emily Johnson",
-    role: "Food Enthusiast",
-    avatar: Musk,
-    rating: 5,
-    review:
-      "Everything was perfect. Amazing food, beautiful presentation and an unforgettable atmosphere.",
-  },
-  {
-    id: 7,
-    name: "Emily Johnson",
-    role: "Food Enthusiast",
-    avatar: Musk,
-    rating: 5,
-    review:
-      "Everything was perfect. Amazing food, beautiful presentation and an unforgettable atmosphere.",
-  },
-  {
-    id: 8,
-    name: "Emily Johnson",
-    role: "Food Enthusiast",
-    avatar: Musk,
-    rating: 5,
-    review:
-      "Everything was perfect. Amazing food, beautiful presentation and an unforgettable atmosphere.",
-  },
-];
-
-
 // Footer data
 
 const SOCIAL_ICONS = {
@@ -189,7 +86,13 @@ const SOCIAL_ICONS = {
     </svg>
   ),
   instagram: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-4 w-4">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      className="h-4 w-4"
+    >
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" />
@@ -206,7 +109,6 @@ export const NAV_LINKS = [
   { label: "Reviews", href: "/reviews" },
 ];
 
-
 export const EVENT_LINKS = [
   { label: "Sustainability", href: "/sustainability" },
   { label: "About Us", href: "/about-us" },
@@ -214,38 +116,50 @@ export const EVENT_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-
 export const SOCIAL_LINKS = [
-  { icon: SOCIAL_ICONS.facebook, href: "https://facebook.com", label: "Facebook" },
+  {
+    icon: SOCIAL_ICONS.facebook,
+    href: "https://facebook.com",
+    label: "Facebook",
+  },
   { icon: SOCIAL_ICONS.twitter, href: "https://twitter.com", label: "Twitter" },
   { icon: SOCIAL_ICONS.youtube, href: "https://youtube.com", label: "Youtube" },
-  { icon: SOCIAL_ICONS.instagram, href: "https://instagram.com", label: "Instagram" },
+  {
+    icon: SOCIAL_ICONS.instagram,
+    href: "https://instagram.com",
+    label: "Instagram",
+  },
 ];
 
-// CHEFS DATA
-export const CHEFS = [
+// Process DATA
+
+export const PROCESS_DATA = [
   {
-    id: 1,
-    name: "Head Chef",
-    title: "Head Chef & Culinary Director",
+    step: "Step 01",
+    title: "Search for your course",
     description:
-      "Brings refined techniques and expert palate from 15+ years of experience in world-class restaurants.",
-    image: chefImage1,
+      "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut fugit, sed quia consequuntur magni res.",
+    icon: Search,
   },
   {
-    id: 2,
-    name: "Sous Chef",
-    title: "Sous Chef & Kitchen Manager",
+    step: "Step 02",
+    title: "Take a Sample Lesson",
     description:
-      "Oversees the kitchen operations with precision and passion, ensuring culinary excellence in every dish.",
-    image: chefImage2,
+      "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut fugit, sed quia consequuntur magni res.",
+    icon: PlayCircle,
   },
   {
-    id: 3,
-    name: "Sommelier",
-    title: "Wine Sommelier & Beverage Expert",
+    step: "Step 03",
+    title: "Preview the Syllabus",
     description:
-      "Curates an exceptional wine collection and guides guests through perfect pairings for their meal.",
-    image: chefImage3,
+      "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut fugit, sed quia consequuntur magni res.",
+    icon: FileText,
+  },
+  {
+    step: "Step 04",
+    title: "Purchase the Course",
+    description:
+      "Nemo enim ipsam voluptatem quia voluptas sit atur aut odit aut fugit, sed quia consequuntur magni res.",
+    icon: ShoppingCart,
   },
 ];

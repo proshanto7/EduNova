@@ -1,13 +1,10 @@
 import BannerSection from "@/components/home/BannerSection";
-import MenuHighlights from "@/components/home/MenuHighlights";
-import CulinaryExperiences from "@/components/home/CulinaryExperiences";
 import LocationContact from "@/components/home/LocationContact";
-import PrivateEvents from "../home/PrivateEvents";
-import ChefProfiles from "@/components/home/ChefProfiles";
 import StatsSection from "../home/StatsSection";
 import CategoriesSection from "../categories/CategoriesSection";
 import AboutSection from "../home/AboutSection";
 import MentorsSlider from "../home/MentorsSlider";
+import ProcessSection from "../home/ProcessSection";
 
 export default function HomePage() {
   return (
@@ -17,6 +14,7 @@ export default function HomePage() {
       <CategoriesSection/>
       <AboutSection/>
       <MentorsSlider/>
+      <ProcessSection/>
       <LocationContact />
     </>
   );
