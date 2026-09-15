@@ -19,7 +19,7 @@ export default function SwiperSlider({
   slideClassName = "",
 }) {
   return (
-    <div className="relative mx-auto w-full max-w-295">
+    <div className="relative mx-auto w-full max-w-295 overflow-hidden">
       {showNavigation && (
         <>
           {/* Previous Button */}
@@ -73,7 +73,9 @@ export default function SwiperSlider({
         grabCursor
         slidesPerView={slidesPerView}
         spaceBetween={spaceBetween}
-        className="overflow-visible!"
+        slidesOffsetBefore={16}
+        slidesOffsetAfter={16}
+        className="overflow-hidden! md:overflow-visible!"
       >
         {children}
       </Swiper>
