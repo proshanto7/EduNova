@@ -32,7 +32,7 @@ export default async function CategoryPage({ params }) {
   const courses = getCoursesByCategory(category.slug);
 
   return (
-    <main className="bg-(--background)">
+    <main className="bg-background">
       {/* Header */}
       <section className="border-b border-(--border) px-6 py-14">
         <div className="mx-auto max-w-7xl">

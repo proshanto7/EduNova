@@ -17,10 +17,6 @@ export default function HomePage() {
       <CategoriesSection/>
       <AboutSection/>
       <MentorsSlider/>
-      <CulinaryExperiences />
-      <ChefProfiles />
-      <MenuHighlights />
-      <PrivateEvents />
       <LocationContact />
     </>
   );
