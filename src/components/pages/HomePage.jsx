@@ -5,6 +5,7 @@ import CategoriesSection from "../categories/CategoriesSection";
 import AboutSection from "../home/AboutSection";
 import MentorsSlider from "../home/MentorsSlider";
 import ProcessSection from "../home/ProcessSection";
+import TechStackSection from "../home/TechStackSection";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
       <MentorsSlider/>
       <ProcessSection/>
       <LocationContact />
+      <TechStackSection/>
     </>
   );
 }
