@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { MENTORS_DATA, getMentorBySlug } from "@/data/mentors";
-import MentorDetailsPage from "@/components/mentors/MentorDetailsPage";
+import Breadcrumb from "@/components/common/Breadcrumb";
+import MentorProfile from "@/components/mentors/MentorProfile";
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function Page({ params }) {
+export default async function MentorDetailsPage({ params }) {
   const { slug } = await params;
 
   if (!SLUG_PATTERN.test(slug)) {
@@ -34,5 +35,16 @@ export default async function Page({ params }) {
     notFound();
   }
 
-  return <MentorDetailsPage mentor={mentor} />;
+  return (
+    <main className="bg-background">
+      <Breadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Mentors", href: "/mentors" },
+          { label: mentor.name },
+        ]}
+      />
+      <MentorProfile mentor={mentor} />
+    </main>
+  );
 }
