@@ -1,69 +1,60 @@
 import { Search, PlayCircle, FileText, ShoppingCart } from "lucide-react";
 
+// Location & Contact
 export const LOCATION_CONTACT_DATA = {
   header: {
-    eyebrow: "LOCATION & CONTACT",
-    title: "Location & Contact",
+    eyebrow: "Get In Touch",
+    title: "Visit or Contact Us",
     description:
-      "Not an event or data? It's a precise reservation, simply a designed location for the evening.",
+      "Have questions about our courses? Reach out to our team or visit our campus — we're happy to help you find the right learning path.",
   },
-
   location: {
-    openingHours: {
-      title: "Opening hours",
-      days: "Monday to Friday",
-      time: "7:00 am - 11:00 pm",
+    map: {
+      title: "Campus Location",
+      query: "Sylhet, Bangladesh",
     },
-
+    openingHours: {
+      title: "Office Hours",
+      days: "Sunday – Thursday",
+      time: "9:00 AM – 6:00 PM",
+    },
     address: {
       title: "Address",
-      line1: "The Green District",
-      line2: "Arlington, FL 33712",
-    },
-
-    map: {
-      title: "Restaurant Location",
-      query: "The Green District, Arlington, FL 33712",
+      line1: "House 12, Road 5, Uposhohor",
+      line2: "Sylhet, Bangladesh",
     },
   },
-
   form: {
     name: {
-      label: "Name",
-      placeholder: "Name",
+      label: "Full Name",
+      placeholder: "Your name",
     },
-
-    date: {
-      label: "Date",
+    email: {
+      label: "Email Address",
+      placeholder: "you@example.com",
     },
-
-    time: {
-      label: "Time",
+    phone: {
+      label: "Phone Number",
+      placeholder: "+880 1XXX-XXXXXX",
     },
-
-    party: {
-      label: "Party",
-      defaultValue: "2",
+    course: {
+      label: "Course of Interest",
+      defaultValue: "development",
       options: [
-        { value: "1", label: "1" },
-        { value: "2", label: "2" },
-        { value: "3", label: "3" },
-        { value: "4", label: "4" },
-        { value: "5", label: "5" },
-        { value: "6", label: "6" },
-        { value: "7", label: "7" },
-        { value: "8", label: "8+" },
+        { value: "development", label: "Web Development" },
+        { value: "business", label: "Business" },
+        { value: "design", label: "Design" },
+        { value: "marketing", label: "Marketing" },
+        { value: "personal-development", label: "Personal Development" },
+        { value: "other", label: "Other / Not Sure" },
       ],
     },
-
-    partySize: {
-      label: "Party size",
-      min: "1",
+    message: {
+      label: "Message",
+      placeholder: "Tell us a bit about what you're looking for...",
     },
-
-    button: "CONTACT",
-
-    successMessage: "Thanks! Your reservation request has been received.",
+    button: "Send Message",
+    successMessage: "Thanks! We'll get back to you within 24 hours.",
   },
 };
 

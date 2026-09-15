@@ -5,7 +5,7 @@ import { PROCESS_DATA } from "@/data/home";
 
 export default function ProcessSection() {
   return (
-    <section className="bg-(--background) px-6 py-16 md:py-20">
+    <section className="bg-background px-6 py-16 md:py-20">
       <div className="mx-auto max-w-5xl">
         {/* Header */}
         <motion.div
@@ -48,7 +48,7 @@ export default function ProcessSection() {
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.2 }}
-                  className="absolute left-5 top-8 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-2 border-(--accent) bg-(--background) md:left-1/2 md:top-10"
+                  className="absolute left-5 top-8 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-2 border-(--accent) bg-background md:left-1/2 md:top-10"
                 />
 
                 {/* Mobile layout — left aligned, icon inline */}

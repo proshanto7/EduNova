@@ -88,7 +88,7 @@ export default function LocationContact() {
         </div>
 
         {/* =========================
-            CONTACT CARD
+            CONTACT FORM CARD
         ========================== */}
         <div className="flex items-center overflow-hidden rounded-[15px] border border-(--border) bg-(--background-card) p-[23px_24px] shadow-[0_18px_50px_rgba(0,0,0,0.2)]">
           <form onSubmit={handleSubmit} className="w-full">
@@ -111,89 +111,89 @@ export default function LocationContact() {
               />
             </div>
 
-            {/* Date */}
-            <div className="mb-3.5">
-              <label
-                htmlFor="date"
-                className="mb-1.5 block text-[10px] text-(--text-muted)"
-              >
-                {LOCATION_CONTACT_DATA.form.date.label}
-              </label>
-
-              <input
-                id="date"
-                name="date"
-                type="date"
-                required
-                className="[&::-webkit-calendar-picker-indicator]:invert h-10.5 w-full rounded-[3px] border border-(--border-light) bg-(--background-input) px-3.25 text-[11px] text-(--text-light) outline-none focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/5"
-              />
-            </div>
-
-            {/* Time + Party */}
+            {/* Email + Phone */}
             <div className="grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-3.25">
-              {/* Time */}
               <div className="mb-3.5">
                 <label
-                  htmlFor="time"
+                  htmlFor="email"
                   className="mb-1.5 block text-[10px] text-(--text-muted)"
                 >
-                  {LOCATION_CONTACT_DATA.form.time.label}
+                  {LOCATION_CONTACT_DATA.form.email.label}
                 </label>
 
                 <input
-                  id="time"
-                  name="time"
-                  type="time"
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder={LOCATION_CONTACT_DATA.form.email.placeholder}
                   required
-                  className="[&::-webkit-calendar-picker-indicator]:invert h-10.5 w-full rounded-[3px] border border-(--border-light) bg-(--background-input) px-3.25 text-[11px] text-(--text-light) outline-none focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/5"
+                  className="h-10.5 w-full rounded-[3px] border border-(--border-light) bg-(--background-input) px-3.25 text-[11px] text-(--text-light) outline-none placeholder:text-(--text-placeholder) focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/5"
                 />
               </div>
 
-              {/* Party */}
               <div className="mb-3.5">
                 <label
-                  htmlFor="party"
+                  htmlFor="phone"
                   className="mb-1.5 block text-[10px] text-(--text-muted)"
                 >
-                  {LOCATION_CONTACT_DATA.form.party.label}
+                  {LOCATION_CONTACT_DATA.form.phone.label}
                 </label>
 
-                <select
-                  id="party"
-                  name="party"
-                  defaultValue={LOCATION_CONTACT_DATA.form.party.defaultValue}
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder={LOCATION_CONTACT_DATA.form.phone.placeholder}
                   required
-                  className="h-10.5 w-full cursor-pointer rounded-[3px] border border-(--border-light) bg-(--background-input) px-3.25 text-[11px] text-(--text-light) outline-none focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/5"
-                >
-                  {LOCATION_CONTACT_DATA.form.party.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                  className="h-10.5 w-full rounded-[3px] border border-(--border-light) bg-(--background-input) px-3.25 text-[11px] text-(--text-light) outline-none placeholder:text-(--text-placeholder) focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/5"
+                />
               </div>
             </div>
 
-            {/* Party Size */}
+            {/* Course of Interest */}
             <div className="mb-3.5">
               <label
-                htmlFor="partySize"
+                htmlFor="course"
                 className="mb-1.5 block text-[10px] text-(--text-muted)"
               >
-                {LOCATION_CONTACT_DATA.form.partySize.label}
+                {LOCATION_CONTACT_DATA.form.course.label}
               </label>
 
-              <input
-                id="partySize"
-                name="partySize"
-                type="number"
-                min={LOCATION_CONTACT_DATA.form.partySize.min}
+              <select
+                id="course"
+                name="course"
+                defaultValue={LOCATION_CONTACT_DATA.form.course.defaultValue}
                 required
-                className="h-10.5 w-full rounded-[3px] border border-(--border-light) bg-(--background-input) px-3.25 text-[11px] text-(--text-light) outline-none focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/5"
+                className="h-10.5 w-full cursor-pointer rounded-[3px] border border-(--border-light) bg-(--background-input) px-3.25 text-[11px] text-(--text-light) outline-none focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/5"
+              >
+                {LOCATION_CONTACT_DATA.form.course.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Message */}
+            <div className="mb-3.5">
+              <label
+                htmlFor="message"
+                className="mb-1.5 block text-[10px] text-(--text-muted)"
+              >
+                {LOCATION_CONTACT_DATA.form.message.label}
+              </label>
+
+              <textarea
+                id="message"
+                name="message"
+                rows={3}
+                placeholder={LOCATION_CONTACT_DATA.form.message.placeholder}
+                required
+                className="w-full resize-none rounded-[3px] border border-(--border-light) bg-(--background-input) px-3.25 py-2.5 text-[11px] text-(--text-light) outline-none placeholder:text-(--text-placeholder) focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/5"
               />
             </div>
 
-            {/* Contact Button */}
+            {/* Submit Button */}
             <button
               type="submit"
               className="mt-1.25 h-11.25 w-full rounded-full border-0 bg-(--accent) text-[11px] font-bold tracking-[0.04em] text-(--accent-text) transition-all duration-200 hover:-translate-y-px hover:bg-(--accent-hover) active:translate-y-0"
