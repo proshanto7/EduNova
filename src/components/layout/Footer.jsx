@@ -1,79 +1,174 @@
 import Link from "next/link";
-import { SOCIAL_LINKS, NAV_LINKS, EVENT_LINKS } from "@/data/home";
+import { ArrowRight } from "lucide-react";
+import { FOOTER_DATA } from "@/data/footer";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="bg-background border-t border-(--border-light) px-6 py-14 md:px-16">
-      <div className="mx-auto max-w-7xl">
-        {/* Top row: Logo + Nav columns + Social icons */}
-        <div className="flex flex-col gap-10 md:flex-row md:justify-between">
-          {/* Logo + tagline */}
-          <div className="max-w-xs">
-            <div className="flex items-center gap-2 text-(--nav-logo)">
-              <span className="text-lg">&#10022;</span>
-              <span className="text-lg font-serif tracking-wide">
-                THE PALATE
-              </span>
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-(--text-muted)">
-              Sensual feeling since all-over convention, gestures dominions
-              &ndash; alla legibly resented.
+<footer className="border-t border-(--border) bg-(--footer-bg)">
+        {/* Newsletter Strip */}
+      <div className="border-b border-(--border) px-6 py-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 sm:flex-row">
+          <div>
+            <h3 className="text-lg font-bold text-(--text-primary)">
+              Subscribe to our newsletter
+            </h3>
+
+            <p className="mt-1 text-sm text-(--text-secondary)">
+              Get the latest courses and updates delivered to your inbox.
             </p>
           </div>
 
-          {/* Nav columns */}
-          <div className="flex flex-wrap gap-10 sm:gap-16">
-            <nav className="flex flex-col gap-3">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm text-(--nav-text) transition-colors hover:text-(--nav-text-hover)"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+          <form className="flex w-full max-w-sm items-center gap-2 sm:w-auto">
+            <input
+              type="email"
+              required
+              placeholder="Enter your email"
+              className="h-11 w-full rounded-full border border-(--border-light) bg-(--background-input) px-4 text-sm text-(--text-primary) outline-none placeholder:text-(--text-placeholder) focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/10"
+            />
 
-            <nav className="flex flex-col gap-3">
-              <span className="mb-1 text-sm font-medium text-(--text-primary)">
-                Private Events
-              </span>
-              {EVENT_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm text-(--nav-text) transition-colors hover:text-(--nav-text-hover)"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+            <button
+              type="submit"
+              aria-label="Subscribe"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-(--accent) text-(--accent-text) transition-opacity hover:opacity-90"
+            >
+              <ArrowRight size={18} />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Main Footer */}
+      <div className="px-6 py-14">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Brand */}
+          <div className="col-span-2 lg:col-span-1">
+            <Link
+              href="/"
+              className="font-serif text-xl tracking-[0.15em] text-(--text-primary)"
+            >
+              {FOOTER_DATA.brand.name}
+            </Link>
+
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-(--text-secondary)">
+              {FOOTER_DATA.brand.description}
+            </p>
+
+            {/* Social Links */}
+            <div className="mt-5 flex items-center gap-3">
+              {FOOTER_DATA.social.map((social) => {
+                const Icon = social.icon;
+
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-(--border) text-(--text-muted) transition-colors hover:border-(--accent) hover:text-(--accent)"
+                  >
+                    <Icon />
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Social icons */}
-          <div className="flex h-fit gap-3">
-            {SOCIAL_LINKS.map(({ icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-(--nav-circle-border) bg-(--nav-circle-bg) text-(--nav-circle-text) transition-colors hover:bg-(--nav-circle-hover)"
-              >
-                {icon}
-              </a>
-            ))}
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wide text-(--text-primary)">
+              Quick Links
+            </h4>
+
+            <ul className="mt-4 space-y-2.5">
+              {FOOTER_DATA.quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-(--text-secondary) transition-colors hover:text-(--accent)"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Categories */}
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wide text-(--text-primary)">
+              Categories
+            </h4>
+
+            <ul className="mt-4 space-y-2.5">
+              {FOOTER_DATA.categories.map((category) => (
+                <li key={category.href}>
+                  <Link
+                    href={category.href}
+                    className="text-sm text-(--text-secondary) transition-colors hover:text-(--accent)"
+                  >
+                    {category.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-sm font-bold uppercase tracking-wide text-(--text-primary)">
+              Contact
+            </h4>
+
+            <ul className="mt-4 space-y-3">
+              {FOOTER_DATA.contact.map((item) => {
+                const Icon = item.icon;
+                const isExternal = item.href.startsWith("http");
+
+                return (
+                  <li key={item.text}>
+                    <a
+                      href={item.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={
+                        isExternal
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      className="group flex items-start gap-2.5 text-sm text-(--text-secondary) transition-colors hover:text-(--accent)"
+                    >
+                      <Icon />
+
+                      <span>{item.text}</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom row: copyright */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-(--border-light) pt-6 text-xs text-(--text-muted) sm:flex-row">
-          <p>
-            &copy; {new Date().getFullYear()} The Palate. All rights reserved.
+      {/* Bottom Bar */}
+      <div className="border-t border-(--border) px-6 py-6">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 sm:flex-row">
+          <p className="text-xs text-(--text-muted)">
+            © {year} {FOOTER_DATA.brand.name}. All rights reserved.
           </p>
-          <p>Crafted with care.</p>
+
+          <div className="flex items-center gap-5">
+            {FOOTER_DATA.legal.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-xs text-(--text-muted) transition-colors hover:text-(--accent)"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

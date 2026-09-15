@@ -35,7 +35,7 @@
   --border-light: rgba(0, 0, 0, 0.06);
 
   --success: #5a7a4a;
-
+  --footer-bg: #f0ebe1;
   /* Navbar */
   --nav-bg: #fdfbf7;
   --nav-logo-text: #1c1c1e;
@@ -88,7 +88,7 @@
   --border-light: rgba(255, 255, 255, 0.055);
 
   --success: #b6c9ae;
-
+  --footer-bg: #050505;
   /* Navbar */
   --nav-bg: #0f0f0f;
   --nav-logo-text: var(--primary);
@@ -120,7 +120,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Reusable Swiper */
@@ -136,7 +138,10 @@ body {
   background: var(--primary) !important;
   opacity: 0.4 !important;
   cursor: pointer;
-  transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    opacity 0.25s ease;
 }
 .swiper-pagination-bullet:hover {
   opacity: 0.8 !important;
