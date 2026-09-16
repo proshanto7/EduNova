@@ -1,16 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const { login } = useAuth();
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    login();
+    router.push("/");
   };
 
   return (
@@ -25,7 +29,6 @@ export default function LoginForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Email */}
         <div>
           <label
             htmlFor="email"
@@ -49,7 +52,6 @@ export default function LoginForm() {
           </div>
         </div>
 
-        {/* Password */}
         <div>
           <div className="mb-1.5 flex items-center justify-between">
             <label
@@ -89,7 +91,6 @@ export default function LoginForm() {
           </div>
         </div>
 
-        {/* Remember me */}
         <div className="flex items-center gap-2">
           <input
             id="remember"
@@ -105,19 +106,12 @@ export default function LoginForm() {
           </label>
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           className="h-11 w-full rounded-full bg-(--accent) text-sm font-bold text-(--accent-text) transition-all duration-200 hover:-translate-y-px hover:bg-(--accent-hover) active:translate-y-0"
         >
           Log In
         </button>
-
-        {submitted && (
-          <p role="status" className="text-center text-xs text-(--success)">
-            Logged in successfully!
-          </p>
-        )}
       </form>
 
       <p className="mt-6 text-center text-sm text-(--text-secondary)">

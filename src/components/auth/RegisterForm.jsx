@@ -1,17 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const { login } = useAuth();
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    login();
+    router.push("/");
   };
 
   return (
@@ -26,7 +30,6 @@ export default function RegisterForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Full Name */}
         <div>
           <label
             htmlFor="name"
@@ -50,7 +53,6 @@ export default function RegisterForm() {
           </div>
         </div>
 
-        {/* Email */}
         <div>
           <label
             htmlFor="email"
@@ -74,7 +76,6 @@ export default function RegisterForm() {
           </div>
         </div>
 
-        {/* Password */}
         <div>
           <label
             htmlFor="password"
@@ -110,7 +111,6 @@ export default function RegisterForm() {
           </p>
         </div>
 
-        {/* Confirm Password */}
         <div>
           <label
             htmlFor="confirmPassword"
@@ -145,7 +145,6 @@ export default function RegisterForm() {
           </div>
         </div>
 
-        {/* Terms */}
         <div className="flex items-start gap-2">
           <input
             id="terms"
@@ -169,19 +168,12 @@ export default function RegisterForm() {
           </label>
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           className="h-11 w-full rounded-full bg-(--accent) text-sm font-bold text-(--accent-text) transition-all duration-200 hover:-translate-y-px hover:bg-(--accent-hover) active:translate-y-0"
         >
           Create Account
         </button>
-
-        {submitted && (
-          <p role="status" className="text-center text-xs text-(--success)">
-            Account created successfully!
-          </p>
-        )}
       </form>
 
       <p className="mt-6 text-center text-sm text-(--text-secondary)">

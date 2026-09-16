@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { User, ShoppingCart, Menu, X } from "lucide-react";
+import { User, LogOut, Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/common/ThemeToggle";
+import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
 import LogoLight from "@/imports/logo.png";
 import LogoDark from "@/imports/logo-dark.png";
@@ -26,6 +27,8 @@ export default function Navbar() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { isLoggedIn, logout, mounted: authMounted } = useAuth();
 
   useEffect(() => setMounted(true), []);
 
@@ -45,6 +48,11 @@ export default function Navbar() {
       return pathname === "/";
     }
     return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
   };
 
   return (
@@ -97,27 +105,32 @@ export default function Navbar() {
         <div className="hidden items-center gap-4 lg:flex">
           <ThemeToggle />
 
-          <div className="flex h-9 w-9 items-center justify-center border border-(--nav-icon-border)">
-            <User size={16} className="text-(--nav-icon-text)" />
-          </div>
-
-          <div className="flex items-center gap-1.5 text-[13px] font-semibold">
-            <Link
-              href="/login"
-              className="text-(--nav-login-text) transition-colors hover:text-(--nav-accent)"
+          {authMounted && isLoggedIn ? (
+            <button
+              type="button"
+              onClick={handleLogout}
+              aria-label="Log out"
+              className="flex h-9 w-9 items-center justify-center border border-(--nav-icon-border) transition-colors hover:bg-(--nav-circle-hover)"
             >
-              Login
-            </Link>
-            <span className="text-(--nav-divider)">|</span>
-            <Link
-              href="/register"
-              className="text-(--nav-login-text) transition-colors hover:text-(--nav-accent)"
-            >
-              Register
-            </Link>
-          </div>
-
-          <ShoppingCart size={18} className="text-(--nav-icon-text)" />
+              <User size={16} className="text-(--nav-icon-text)" />
+            </button>
+          ) : (
+            <div className="flex items-center gap-1.5 text-[13px] font-semibold">
+              <Link
+                href="/login"
+                className="text-(--nav-login-text) transition-colors hover:text-(--nav-accent)"
+              >
+                Login
+              </Link>
+              <span className="text-(--nav-divider)">|</span>
+              <Link
+                href="/register"
+                className="text-(--nav-login-text) transition-colors hover:text-(--nav-accent)"
+              >
+                Register
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* Right Actions - Mobile (toggle + hamburger) */}
@@ -158,25 +171,37 @@ export default function Navbar() {
             })}
 
             <div className="mt-2 flex items-center gap-3 border-t border-(--nav-mobile-border) pt-4 text-sm font-semibold">
-              <Link
-                href="/login"
-                onClick={() => setIsOpen(false)}
-                className="text-(--nav-login-text)"
-              >
-                Login
-              </Link>
-              <span className="text-(--nav-divider)">|</span>
-              <Link
-                href="/register"
-                onClick={() => setIsOpen(false)}
-                className="text-(--nav-login-text)"
-              >
-                Register
-              </Link>
-              <ShoppingCart
-                size={18}
-                className="ml-auto text-(--nav-icon-text)"
-              />
+              {authMounted && isLoggedIn ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleLogout();
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center gap-1.5 text-(--nav-login-text)"
+                >
+                  <LogOut size={15} />
+                  Log Out
+                </button>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    onClick={() => setIsOpen(false)}
+                    className="text-(--nav-login-text)"
+                  >
+                    Login
+                  </Link>
+                  <span className="text-(--nav-divider)">|</span>
+                  <Link
+                    href="/register"
+                    onClick={() => setIsOpen(false)}
+                    className="text-(--nav-login-text)"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
