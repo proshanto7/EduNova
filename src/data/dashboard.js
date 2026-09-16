@@ -34,6 +34,15 @@ export const ENROLLED_COURSES_DATA = [
   },
 ];
 
+export const CERTIFICATES_DATA = [
+  {
+    id: 1,
+    courseTitle: "UI/UX Design Fundamentals",
+    issuedDate: "2026-01-10",
+    instructor: "Nusrat Jahan",
+  },
+];
+
 export const DASHBOARD_NAV = [
   { label: "Overview", href: "/dashboard", key: "overview" },
   { label: "My Courses", href: "/dashboard/courses", key: "courses" },
