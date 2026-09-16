@@ -1,7 +1,16 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function GalleryHero() {
   return (
     <section className="border-b border-(--border) px-6 py-14">
-      <div className="mx-auto max-w-4xl text-center">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mx-auto max-w-4xl text-center"
+      >
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-(--accent)">
           Our Moments
         </p>
@@ -12,7 +21,7 @@ export default function GalleryHero() {
           A glimpse into our classrooms, workshops, events, and the community
           we&apos;re building together.
         </p>
-      </div>
+      </motion.div>
     </section>
   );
 }

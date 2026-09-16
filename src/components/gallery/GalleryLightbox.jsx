@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function GalleryLightbox({ items, activeIndex, onClose, onNavigate }) {
@@ -34,7 +35,11 @@ export default function GalleryLightbox({ items, activeIndex, onClose, onNavigat
   if (!item) return null;
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
@@ -75,7 +80,12 @@ export default function GalleryLightbox({ items, activeIndex, onClose, onNavigat
       </button>
 
       {/* Image */}
-      <div
+      <motion.div
+        key={item.id}
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.92 }}
+        transition={{ duration: 0.25 }}
         className="relative h-[70vh] w-full max-w-4xl"
         onClick={(e) => e.stopPropagation()}
       >
@@ -87,12 +97,18 @@ export default function GalleryLightbox({ items, activeIndex, onClose, onNavigat
           className="object-contain"
           priority
         />
-      </div>
+      </motion.div>
 
       {/* Caption */}
-      <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-sm text-white/80">
+      <motion.p
+        key={`caption-${item.id}`}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-sm text-white/80"
+      >
         {item.caption}
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
   );
 }
