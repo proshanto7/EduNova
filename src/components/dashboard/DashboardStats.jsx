@@ -1,9 +1,29 @@
-import { DASHBOARD_STATS } from "@/data/dashboard";
+"use client";
+
+import { BookOpen, Clock, TrendingUp, Trophy } from "lucide-react";
+import { useMyCourses } from "@/hooks/useStudentData";
 
 export default function DashboardStats() {
+  const { courses, loading } = useMyCourses();
+
+  const completed = courses.filter((course) => course.completed).length;
+  const averageProgress = courses.length
+    ? Math.round(
+        courses.reduce((sum, course) => sum + course.progress, 0) /
+          courses.length
+      )
+    : 0;
+
+  const stats = [
+    { label: "Enrolled Courses", value: courses.length, icon: BookOpen },
+    { label: "In Progress", value: courses.length - completed, icon: Clock },
+    { label: "Completed", value: completed, icon: Trophy },
+    { label: "Average Progress", value: `${averageProgress}%`, icon: TrendingUp },
+  ];
+
   return (
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-      {DASHBOARD_STATS.map((stat) => {
+      {stats.map((stat) => {
         const Icon = stat.icon;
 
         return (
@@ -15,7 +35,7 @@ export default function DashboardStats() {
               <Icon size={18} className="text-(--stat-icon-color)" strokeWidth={1.75} />
             </div>
             <p className="mt-3 text-2xl font-bold text-(--text-primary)">
-              {stat.value}
+              {loading ? "–" : stat.value}
             </p>
             <p className="mt-0.5 text-xs text-(--text-muted)">{stat.label}</p>
           </div>

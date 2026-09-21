@@ -1,20 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { LogOut } from "lucide-react";
-import { useAuth } from "@/context/AuthContext";
+import { useLogout } from "@/hooks/useAuthApi";
 import { DASHBOARD_NAV } from "@/data/dashboard";
 
 export default function DashboardSidebar() {
   const pathname = usePathname();
-  const router = useRouter();
-  const { logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    router.push("/");
-  };
+  const { submit: handleLogout, loading } = useLogout();
 
   return (
     <aside className="w-full shrink-0 lg:w-64">
@@ -43,7 +37,8 @@ export default function DashboardSidebar() {
           <button
             type="button"
             onClick={handleLogout}
-            className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-(--text-secondary) transition-colors hover:bg-background hover:text-red-500"
+            disabled={loading}
+            className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-(--text-secondary) transition-colors hover:bg-background hover:text-red-500 disabled:opacity-60"
           >
             <LogOut size={16} />
             Log Out

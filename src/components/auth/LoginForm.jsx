@@ -4,17 +4,27 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
-import { useAuth } from "@/context/AuthContext";
+import { useLogin } from "@/hooks/useAuthApi";
+import { getSafeNextPath } from "@/lib/auth-utils";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const { login } = useAuth();
+  const { submit, loading, error } = useLogin();
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login();
-    router.push("/");
+    if (loading) return;
+
+    const formData = new FormData(e.currentTarget);
+    const email = String(formData.get("email") ?? "").trim();
+    const password = String(formData.get("password") ?? "");
+
+    const result = await submit({ email, password });
+
+    if (result.ok) {
+      router.replace(getSafeNextPath());
+    }
   };
 
   return (
@@ -29,6 +39,15 @@ export default function LoginForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        {error && (
+          <div
+            role="alert"
+            className="rounded-lg border border-red-500/30 bg-red-500/10 px-3.5 py-2.5 text-sm text-red-500"
+          >
+            {error}
+          </div>
+        )}
+
         <div>
           <label
             htmlFor="email"
@@ -45,9 +64,11 @@ export default function LoginForm() {
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
               placeholder="you@example.com"
               required
-              className="h-11 w-full rounded-lg border border-(--border-light) bg-(--background-input) pl-10 pr-3.5 text-sm text-(--text-light) outline-none placeholder:text-(--text-placeholder) focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/10"
+              disabled={loading}
+              className="h-11 w-full rounded-lg border border-(--border-light) bg-(--background-input) pl-10 pr-3.5 text-sm text-(--text-light) outline-none placeholder:text-(--text-placeholder) focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/10 disabled:opacity-60"
             />
           </div>
         </div>
@@ -76,9 +97,11 @@ export default function LoginForm() {
               id="password"
               name="password"
               type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
               placeholder="Enter your password"
               required
-              className="h-11 w-full rounded-lg border border-(--border-light) bg-(--background-input) pl-10 pr-10 text-sm text-(--text-light) outline-none placeholder:text-(--text-placeholder) focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/10"
+              disabled={loading}
+              className="h-11 w-full rounded-lg border border-(--border-light) bg-(--background-input) pl-10 pr-10 text-sm text-(--text-light) outline-none placeholder:text-(--text-placeholder) focus:border-(--accent)/45 focus:ring-4 focus:ring-(--accent)/10 disabled:opacity-60"
             />
             <button
               type="button"
@@ -96,6 +119,7 @@ export default function LoginForm() {
             id="remember"
             name="remember"
             type="checkbox"
+            disabled={loading}
             className="h-4 w-4 cursor-pointer rounded border-(--border-light) accent-(--accent)"
           />
           <label
@@ -108,9 +132,10 @@ export default function LoginForm() {
 
         <button
           type="submit"
-          className="h-11 w-full rounded-full bg-(--accent) text-sm font-bold text-(--accent-text) transition-all duration-200 hover:-translate-y-px hover:bg-(--accent-hover) active:translate-y-0"
+          disabled={loading}
+          className="h-11 w-full rounded-full bg-(--accent) text-sm font-bold text-(--accent-text) transition-all duration-200 hover:-translate-y-px hover:bg-(--accent-hover) active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
         >
-          Log In
+          {loading ? "Logging in..." : "Log In"}
         </button>
       </form>
 

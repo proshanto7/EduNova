@@ -1,18 +1,24 @@
-import { User } from "lucide-react";
+"use client";
+
+import { useAuth } from "@/context/AuthContext";
+import { pickUserAvatar } from "@/lib/image-utils";
+import UserAvatar from "@/components/dashboard/UserAvatar";
 
 export default function ProfileCard() {
+  const { user } = useAuth();
+
+  const firstName = String(user?.name ?? "").trim().split(" ")[0];
+
   return (
     <div className="flex items-center gap-4 rounded-2xl border border-(--border) bg-(--background-card) p-5">
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-(--stat-icon-bg)">
-        <User size={24} className="text-(--stat-icon-color)" strokeWidth={1.75} />
-      </div>
+      <UserAvatar src={pickUserAvatar(user)} size={56} iconSize={24} />
 
-      <div>
-        <p className="text-base font-bold text-(--text-primary)">
-          Welcome back!
+      <div className="min-w-0">
+        <p className="truncate text-base font-bold text-(--text-primary)">
+          {firstName ? `Welcome back, ${firstName}!` : "Welcome back!"}
         </p>
-        <p className="text-sm text-(--text-secondary)">
-          Continue where you left off.
+        <p className="truncate text-sm text-(--text-secondary)">
+          {user?.email || "Continue where you left off."}
         </p>
       </div>
     </div>

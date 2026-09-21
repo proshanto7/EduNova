@@ -1,10 +1,10 @@
-import DashboardSettingsPage from "@/components/pages/dashboard/DashboardSettingsPage";
+import SettingsPage from "@/components/pages/dashboard/SettingsPage";
+
 export const metadata = {
   title: "Settings",
+  description: "Manage your profile and password.",
 };
 
-const page = () => {
-  return <DashboardSettingsPage />;
-};
-
-export default page;
+export default function Page() {
+  return <SettingsPage />;
+}

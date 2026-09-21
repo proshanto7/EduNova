@@ -1,10 +1,10 @@
-import DashboardCertificatesPage from "@/components/pages/dashboard/DashboardCertificatesPage";
+import CertificatesPage from "@/components/pages/dashboard/CertificatesPage";
+
 export const metadata = {
   title: "Certificates",
+  description: "Certificates you have earned.",
 };
 
-const page = () => {
-  return <DashboardCertificatesPage />;
-};
-
-export default page;
+export default function Page() {
+  return <CertificatesPage />;
+}

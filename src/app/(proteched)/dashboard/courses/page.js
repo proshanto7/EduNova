@@ -1,9 +1,10 @@
-import DashboardCoursesPage from "@/components/pages/dashboard/DashboardCoursesPage";
+import MyCoursesPage from "@/components/pages/dashboard/MyCoursesPage";
+
 export const metadata = {
   title: "My Courses",
-};
-const page = () => {
-  return <DashboardCoursesPage />;
+  description: "Courses you are enrolled in.",
 };
 
-export default page;
+export default function Page() {
+  return <MyCoursesPage />;
+}
