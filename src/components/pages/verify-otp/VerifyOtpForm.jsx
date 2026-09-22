@@ -58,7 +58,10 @@ export default function VerifyOtpForm() {
     return (
       <p className="text-center text-sm text-(--text-secondary)">
         No email found. Please{" "}
-        <a href="/register" className="font-medium text-(--accent) hover:text-(--accent-hover)">
+        <a
+          href="/register"
+          className="font-medium text-(--accent) hover:text-(--accent-hover)"
+        >
           register
         </a>{" "}
         again.
@@ -69,7 +72,9 @@ export default function VerifyOtpForm() {
   return (
     <>
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold text-(--text-primary)">Verify your email</h1>
+        <h1 className="text-2xl font-bold text-(--text-primary)">
+          Verify your email
+        </h1>
         <p className="mt-1.5 text-sm text-(--text-secondary)">
           Enter the 6-digit code sent to{" "}
           <span className="font-medium text-(--text-primary)">{email}</span>
@@ -78,23 +83,33 @@ export default function VerifyOtpForm() {
 
       <div className="mb-4 flex items-center justify-between text-xs">
         <span className="text-(--text-muted)">OTP validity</span>
-        <span className={`font-semibold tabular-nums ${isExpired ? "text-red-500" : "text-(--text-primary)"}`}>
+        <span
+          className={`font-semibold tabular-nums ${isExpired ? "text-red-500" : "text-(--text-primary)"}`}
+        >
           {isExpired ? "Expired" : formatted}
         </span>
       </div>
 
       {serverError && (
-        <p role="alert" className="mb-4 rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-500">
+        <p
+          role="alert"
+          className="mb-4 rounded-lg bg-red-500/10 px-3 py-2 text-xs text-red-500"
+        >
           {serverError}
         </p>
       )}
       {info && (
-        <p className="mb-4 rounded-lg bg-(--success)/10 px-3 py-2 text-xs text-(--success)">{info}</p>
+        <p className="mb-4 rounded-lg bg-(--success)/10 px-3 py-2 text-xs text-(--success)">
+          {info}
+        </p>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
         <div>
-          <label htmlFor="otp" className="mb-1.5 block text-xs font-medium text-(--text-muted)">
+          <label
+            htmlFor="otp"
+            className="mb-1.5 block text-xs font-medium text-(--text-muted)"
+          >
             6-digit OTP
           </label>
           <StepInput
@@ -124,10 +139,18 @@ export default function VerifyOtpForm() {
 
       <button
         onClick={handleResend}
-        disabled={resending}
-        className="mt-4 w-full text-center text-xs font-medium text-(--accent) transition-colors hover:text-(--accent-hover) disabled:opacity-60"
+        disabled={resending || !isExpired}
+        className={`mt-4 w-full text-center text-xs font-medium transition-colors ${
+          resending || !isExpired
+            ? "cursor-not-allowed text-(--text-placeholder)"
+            : "cursor-pointer text-(--accent) hover:text-(--accent-hover) underline"
+        }`}
       >
-        {resending ? "Resending..." : "Didn't get the code? Resend OTP"}
+        {resending
+          ? "Resending..."
+          : !isExpired
+            ? `Resend OTP in ${formatted}`
+            : "Resend OTP"}
       </button>
     </>
   );
