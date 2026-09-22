@@ -1,41 +1,23 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { KeyRound } from "lucide-react";
 import StepInput from "@/components/ui/StepInput";
 import { verifyResetOtp } from "@/lib/api";
+import { useOtpCountdown } from "@/hooks/useOtpCountdown";
 
-const OTP_VALID_SECONDS = 10 * 60; // backend-এর PASSWORD_RESET_OTP_EXPIRES_MS এর সাথে মিলিয়ে
+const RESET_OTP_SECONDS = 10 * 60; // backend PASSWORD_RESET_OTP_EXPIRES_MS
 
 export default function OtpStep({ email, onSuccess, onError, onResend }) {
   const [resending, setResending] = useState(false);
-  const [secondsLeft, setSecondsLeft] = useState(OTP_VALID_SECONDS);
+  const { isExpired, formatted, reset } = useOtpCountdown(RESET_OTP_SECONDS);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({ defaultValues: { otp: "" } });
-
-  // Countdown — প্রতি সেকেন্ডে ১ কমবে
-  useEffect(() => {
-    if (secondsLeft <= 0) return;
-
-    const timer = setInterval(() => {
-      setSecondsLeft((prev) => Math.max(prev - 1, 0));
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [secondsLeft]);
-
-  const isExpired = secondsLeft <= 0;
-
-  const formatTime = (totalSeconds) => {
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${String(seconds).padStart(2, "0")}`;
-  };
 
   const onSubmit = async (data) => {
     try {
@@ -46,34 +28,35 @@ export default function OtpStep({ email, onSuccess, onError, onResend }) {
     }
   };
 
-  const handleResend = useCallback(async () => {
+  const handleResend = async () => {
     setResending(true);
     await onResend();
-    setSecondsLeft(OTP_VALID_SECONDS); // 🔑 resend করলে timer আবার শুরু হবে
+    reset();
     setResending(false);
-  }, [onResend]);
+  };
 
   return (
     <div>
       <p className="mb-4 truncate rounded-lg bg-(--border-light) px-3 py-2 text-xs text-(--text-secondary)">
-        Sent to <span className="font-medium text-(--text-primary)">{email}</span>
+        Sent to{" "}
+        <span className="font-medium text-(--text-primary)">{email}</span>
       </p>
 
-      {/* Countdown indicator */}
       <div className="mb-4 flex items-center justify-between text-xs">
         <span className="text-(--text-muted)">OTP validity</span>
         <span
-          className={`font-semibold tabular-nums ${
-            isExpired ? "text-red-500" : secondsLeft <= 60 ? "text-(--warning, #d97706)" : "text-(--text-primary)"
-          }`}
+          className={`font-semibold tabular-nums ${isExpired ? "text-red-500" : "text-(--text-primary)"}`}
         >
-          {isExpired ? "Expired" : formatTime(secondsLeft)}
+          {isExpired ? "Expired" : formatted}
         </span>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
         <div>
-          <label htmlFor="otp" className="mb-1.5 block text-xs font-medium text-(--text-muted)">
+          <label
+            htmlFor="otp"
+            className="mb-1.5 block text-xs font-medium text-(--text-muted)"
+          >
             6-digit OTP
           </label>
           <StepInput
@@ -110,9 +93,7 @@ export default function OtpStep({ email, onSuccess, onError, onResend }) {
       <button
         onClick={handleResend}
         disabled={resending}
-        className={`mt-4 text-xs font-medium transition-colors disabled:opacity-60 ${
-          isExpired ? "text-(--accent) underline" : "text-(--accent) hover:text-(--accent-hover)"
-        }`}
+        className="mt-4 text-xs font-medium text-(--accent) transition-colors hover:text-(--accent-hover) disabled:opacity-60"
       >
         {resending ? "Resending..." : "Didn't get the code? Resend OTP"}
       </button>
