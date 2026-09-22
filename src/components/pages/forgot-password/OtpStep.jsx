@@ -92,10 +92,18 @@ export default function OtpStep({ email, onSuccess, onError, onResend }) {
 
       <button
         onClick={handleResend}
-        disabled={resending}
-        className="mt-4 text-xs font-medium text-(--accent) transition-colors hover:text-(--accent-hover) disabled:opacity-60"
+        disabled={resending || !isExpired}
+        className={`mt-4 text-xs font-medium transition-colors ${
+          resending || !isExpired
+            ? "cursor-not-allowed text-(--text-placeholder)"
+            : "cursor-pointer text-(--accent) hover:text-(--accent-hover) underline"
+        }`}
       >
-        {resending ? "Resending..." : "Didn't get the code? Resend OTP"}
+        {resending
+          ? "Resending..."
+          : !isExpired
+            ? `Resend OTP in ${formatted}`
+            : "Resend OTP"}
       </button>
     </div>
   );
