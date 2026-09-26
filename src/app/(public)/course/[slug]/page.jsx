@@ -78,7 +78,7 @@ export default async function CourseDetailsPage({ params }) {
     { label: "Home", href: "/" },
     { label: "Courses", href: "/courses" },
     ...(course.category
-      ? [{ label: course.category.name, href: `/courses/${course.category.slug}` }]
+      ? [{ label: course.category.name, href: `/courses?category=${course.category.slug}` }]
       : []),
     { label: course.title },
   ];
