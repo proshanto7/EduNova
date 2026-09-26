@@ -13,7 +13,7 @@ export default function CategoryCard({ category }) {
   return (
     <Link
       href={category.href}
-      className="group relative flex flex-col gap-4 rounded-2xl border border-(--border) bg-(--background-card) p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-transparent hover:shadow-[0_16px_40px_rgba(0,0,0,0.1)]"
+      className="group relative flex h-full flex-col gap-4 rounded-2xl border border-(--border) bg-(--background-card) p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-transparent hover:shadow-[0_16px_40px_rgba(0,0,0,0.1)]"
     >
       {/* Icon */}
       <div
@@ -34,7 +34,7 @@ export default function CategoryCard({ category }) {
       </div>
 
       {/* Text */}
-      <div>
+      <div className="flex-1">
         <h3 className="text-base font-bold text-(--text-primary)">
           {category.name}
         </h3>
