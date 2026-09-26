@@ -15,6 +15,7 @@ import { normalizeCourse, normalizeLesson, listFrom } from "@/lib/adapters";
 import { formatPrice, formatTotalDuration } from "@/lib/format";
 import { optimizeImage } from "@/lib/image-utils";
 import CoursePreviewCurriculum from "@/components/pages/courses/CoursePreviewCurriculum";
+import EnrollButton from "@/components/courses/EnrollButton";
 
 export const dynamic = "force-dynamic";
 
@@ -59,8 +60,7 @@ export async function generateMetadata({ params }) {
 
 export default async function CourseDetailsPage({ params }) {
   const { slug } = await params;
-
-  // 1. Format validate করলাম — malformed/malicious input সরাসরি reject
+// 1. Validate the slug 
   if (!SLUG_PATTERN.test(slug)) {
     notFound();
   }
@@ -252,13 +252,7 @@ export default async function CourseDetailsPage({ params }) {
                 </p>
               )}
 
-              <Link
-                href="/dashboard/courses"
-                className="mt-5 block w-full rounded-full py-3 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                style={{ backgroundColor: color }}
-              >
-                Enroll Now
-              </Link>
+              <EnrollButton courseId={course.id} color={color} />
 
               <div className="mt-6 space-y-3 border-t border-(--border) pt-6 text-sm text-(--text-secondary)">
                 <div className="flex items-center gap-2">

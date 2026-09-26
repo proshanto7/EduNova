@@ -137,6 +137,24 @@ export const getStudentEnrollments = (studentId) =>
   apiRequest(`/enrollment/student/${studentId}`);
 
 // ======================================================
+// ENROLLMENT REQUESTS (student self-serve — no admin token needed)
+// ======================================================
+
+// data: { courseId, note? }
+export const createEnrollmentRequest = (data) => {
+  return apiRequest("/enrollment-request", "POST", data);
+};
+
+export const cancelEnrollmentRequest = (id) => {
+  return apiRequest(`/enrollment-request/${id}`, "DELETE");
+};
+
+export const getMyEnrollmentRequests = () => {
+  return apiRequest("/enrollment-request/my");
+};
+
+
+// ======================================================
 // PROGRESS
 // ======================================================
 

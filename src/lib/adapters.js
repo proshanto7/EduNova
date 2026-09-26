@@ -98,6 +98,31 @@ export const normalizeEnrollment = (enrollment, progressByCourse) => {
   };
 };
 
+// ---------- Enrollment request -> student-er nijer request ----------
+
+// GET /enrollment-request/my -> { _id, status, note, reviewNote, createdAt, course:{...} }
+export const normalizeEnrollmentRequest = (request) => {
+  const course =
+    request?.course && typeof request.course === "object" ? request.course : {};
+
+  return {
+    id: idOf(request),
+    status: request?.status ?? "pending",
+    note: request?.note ?? "",
+    reviewNote: request?.reviewNote ?? "",
+    createdAt: request?.createdAt ?? null,
+    course: {
+      id: idOf(course),
+      slug: course.slug ?? "",
+      title: course.title ?? "Untitled course",
+      image: pickCourseImage(course),
+      price: Number(course.price) || 0,
+      isFree: Boolean(course.isFree),
+      level: course.level ?? "",
+    },
+  };
+};
+
 // ---------- Public catalog: Category / Course ----------
 
 // GET /categories, /categories/slug/:slug -> { _id, name, slug, description, icon:{url}, color, courseCount }
