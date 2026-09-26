@@ -5,7 +5,7 @@ import { getCategoryBySlug, getCourses } from "@/lib/api";
 import { unwrap } from "@/lib/auth-utils";
 import { normalizeCategory, normalizeCourse } from "@/lib/adapters";
 import { getCategoryIcon } from "@/lib/categoryIcons";
-import CourseCard from "@/components/courses/CourseCard";
+import CourseCard from "@/components/pages/courses/CourseCard";
 
 export const dynamic = "force-dynamic";
 

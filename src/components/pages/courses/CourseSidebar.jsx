@@ -1,6 +1,6 @@
 import { Clock, BarChart3, Users } from "lucide-react";
 import { formatPrice, formatTotalDuration } from "@/lib/format";
-import EnrollButton from "@/components/courses/EnrollButton";
+import EnrollButton from "@/components/pages/courses/EnrollButton";
 
 export default function CourseSidebar({ course, color }) {
   return (
