@@ -7,6 +7,7 @@ import Link from "next/link";
 import { User, Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/common/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
+import { resolveImageUrl } from "@/lib/image-utils";
 import Image from "next/image";
 import LogoLight from "@/imports/logo.png";
 import LogoDark from "@/imports/logo-dark.png";
@@ -27,7 +28,9 @@ export default function Navbar() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-  const { isLoggedIn, mounted: authMounted } = useAuth();
+  const { isLoggedIn, user, mounted: authMounted } = useAuth();
+
+  const avatarUrl = resolveImageUrl(user?.avatar);
 
   useEffect(() => setMounted(true), []);
 
@@ -103,9 +106,19 @@ export default function Navbar() {
             <Link
               href="/dashboard"
               aria-label="Go to Dashboard"
-              className="flex h-9 w-9 items-center justify-center border border-(--nav-icon-border) transition-colors hover:bg-(--nav-circle-hover)"
+              className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-(--nav-icon-border) transition-colors hover:bg-(--nav-circle-hover)"
             >
-              <User size={16} className="text-(--nav-icon-text)" />
+              {avatarUrl ? (
+                <Image
+                  src={avatarUrl}
+                  alt={user?.name || "Profile"}
+                  fill
+                  sizes="36px"
+                  className="object-cover"
+                />
+              ) : (
+                <User size={16} className="text-(--nav-icon-text)" />
+              )}
             </Link>
           ) : (
             <div className="flex items-center gap-1.5 text-[13px] font-semibold">
@@ -168,9 +181,21 @@ export default function Navbar() {
                 <Link
                   href="/dashboard"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-1.5 text-(--nav-login-text)"
+                  className="flex items-center gap-2 text-(--nav-login-text)"
                 >
-                  <User size={15} />
+                  {avatarUrl ? (
+                    <span className="relative h-6 w-6 shrink-0 overflow-hidden rounded-full border border-(--nav-icon-border)">
+                      <Image
+                        src={avatarUrl}
+                        alt={user?.name || "Profile"}
+                        fill
+                        sizes="24px"
+                        className="object-cover"
+                      />
+                    </span>
+                  ) : (
+                    <User size={15} />
+                  )}
                   Dashboard
                 </Link>
               ) : (
