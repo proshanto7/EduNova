@@ -1,9 +1,27 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { CATEGORIES_DATA } from "@/data/categories";
+import { getCategories } from "@/lib/api";
+import { unwrap } from "@/lib/auth-utils";
+import { normalizeCategory } from "@/lib/adapters";
 import CategoryCard from "./CategoryCard";
 
-export default function CategoriesSection() {
+async function fetchCategories() {
+  try {
+    const res = await getCategories({ limit: 5 });
+    const data = unwrap(res);
+    const list = Array.isArray(data?.categories) ? data.categories : [];
+    return list.map(normalizeCategory);
+  } catch {
+    // Backend na thakle/error hole section ta chup-chap hide hoye jabe
+    return [];
+  }
+}
+
+export default async function CategoriesSection() {
+  const categories = await fetchCategories();
+
+  if (categories.length === 0) return null;
+
   return (
     <section className="bg-(--background) px-6 py-16">
       <div className="mx-auto max-w-7xl">
@@ -32,8 +50,8 @@ export default function CategoriesSection() {
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          {CATEGORIES_DATA.map((category) => (
-            <CategoryCard key={category.name} category={category} />
+          {categories.map((category) => (
+            <CategoryCard key={category.id || category.slug} category={category} />
           ))}
         </div>
       </div>

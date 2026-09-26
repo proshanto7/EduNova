@@ -1,9 +1,27 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FOOTER_DATA } from "@/data/footer";
+import { getCategories } from "@/lib/api";
+import { unwrap } from "@/lib/auth-utils";
+import { normalizeCategory } from "@/lib/adapters";
 
-export default function Footer() {
+async function fetchFooterCategories() {
+  try {
+    const res = await getCategories({ limit: 5 });
+    const data = unwrap(res);
+    const list = Array.isArray(data?.categories) ? data.categories : [];
+    return list.map(normalizeCategory).map((category) => ({
+      label: category.name,
+      href: category.href,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function Footer() {
   const year = new Date().getFullYear();
+  const categories = await fetchFooterCategories();
 
   return (
 <footer className="border-t border-(--border) bg-(--footer-bg)">
@@ -97,24 +115,26 @@ export default function Footer() {
           </div>
 
           {/* Categories */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-wide text-(--text-primary)">
-              Categories
-            </h4>
+          {categories.length > 0 && (
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-wide text-(--text-primary)">
+                Categories
+              </h4>
 
-            <ul className="mt-4 space-y-2.5">
-              {FOOTER_DATA.categories.map((category) => (
-                <li key={category.href}>
-                  <Link
-                    href={category.href}
-                    className="text-sm text-(--text-secondary) transition-colors hover:text-(--accent)"
-                  >
-                    {category.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+              <ul className="mt-4 space-y-2.5">
+                {categories.map((category) => (
+                  <li key={category.href}>
+                    <Link
+                      href={category.href}
+                      className="text-sm text-(--text-secondary) transition-colors hover:text-(--accent)"
+                    >
+                      {category.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Contact */}
           <div>

@@ -1,5 +1,3 @@
-import { CATEGORIES_DATA } from "@/data/categories";
-
 // ==================== CONTACT ICONS ====================
 
 const PhoneIcon = () => (
@@ -131,10 +129,9 @@ export const FOOTER_DATA = {
     { label: "Contact", href: "/contact" },
   ],
 
-  categories: CATEGORIES_DATA.slice(0, 5).map((category) => ({
-    label: category.name,
-    href: category.href,
-  })),
+  // Real categories are fetched live in Footer.jsx from the API and
+  // merged in at render time — this stays empty as the static fallback.
+  categories: [],
 
   contact: [
     {

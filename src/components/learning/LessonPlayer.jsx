@@ -14,6 +14,7 @@ export default function LessonPlayer({
   onNext,
   onToggle,
   onEnded,
+  hideComplete = false,
 }) {
   return (
     <div className="space-y-4">
@@ -51,19 +52,21 @@ export default function LessonPlayer({
         )}
 
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            onClick={onToggle}
-            disabled={saving || lesson.locked}
-            className={`flex h-11 items-center gap-2 rounded-full px-6 text-sm font-bold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60 ${
-              isDone
-                ? "border border-(--border) text-(--text-secondary) hover:bg-background"
-                : "bg-(--accent) text-(--accent-text) hover:-translate-y-px hover:bg-(--accent-hover) active:translate-y-0"
-            }`}
-          >
-            {isDone && <Check size={16} strokeWidth={2.5} />}
-            {saving ? "Saving..." : isDone ? "Completed (undo)" : "Mark as complete"}
-          </button>
+          {!hideComplete && (
+            <button
+              type="button"
+              onClick={onToggle}
+              disabled={saving || lesson.locked}
+              className={`flex h-11 items-center gap-2 rounded-full px-6 text-sm font-bold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60 ${
+                isDone
+                  ? "border border-(--border) text-(--text-secondary) hover:bg-background"
+                  : "bg-(--accent) text-(--accent-text) hover:-translate-y-px hover:bg-(--accent-hover) active:translate-y-0"
+              }`}
+            >
+              {isDone && <Check size={16} strokeWidth={2.5} />}
+              {saving ? "Saving..." : isDone ? "Completed (undo)" : "Mark as complete"}
+            </button>
+          )}
 
           <div className="ml-auto flex items-center gap-4">
             <button

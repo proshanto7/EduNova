@@ -1,17 +1,43 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
-import { CATEGORIES_DATA, getCategoryBySlug } from "@/data/categories";
-import { getCoursesByCategory } from "@/data/courses";
+import { getCategoryBySlug, getCourses } from "@/lib/api";
+import { unwrap } from "@/lib/auth-utils";
+import { normalizeCategory, normalizeCourse } from "@/lib/adapters";
+import { getCategoryIcon } from "@/lib/categoryIcons";
 import CourseCard from "@/components/courses/CourseCard";
 
-export function generateStaticParams() {
-  return CATEGORIES_DATA.map((category) => ({ slug: category.slug }));
+export const dynamic = "force-dynamic";
+
+async function fetchCategory(slug) {
+  try {
+    const res = await getCategoryBySlug(slug);
+    const data = unwrap(res);
+    return data?.category ? normalizeCategory(data.category) : null;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchCoursesForCategory(categoryId) {
+  try {
+    const res = await getCourses({
+      category: categoryId,
+      isPublished: true,
+      limit: 60,
+    });
+    const data = unwrap(res);
+    return (Array.isArray(data?.courses) ? data.courses : []).map(
+      normalizeCourse,
+    );
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const category = getCategoryBySlug(slug);
+  const category = await fetchCategory(slug);
   if (!category) return {};
 
   return {
@@ -22,14 +48,14 @@ export async function generateMetadata({ params }) {
 
 export default async function CategoryPage({ params }) {
   const { slug } = await params;
-  const category = getCategoryBySlug(slug);
+  const category = await fetchCategory(slug);
 
   if (!category) {
     notFound();
   }
 
-  const Icon = category.icon;
-  const courses = getCoursesByCategory(category.slug);
+  const Icon = getCategoryIcon(category.slug);
+  const courses = await fetchCoursesForCategory(category.id);
 
   return (
     <main className="bg-background">

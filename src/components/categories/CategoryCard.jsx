@@ -1,8 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { getCategoryIcon } from "@/lib/categoryIcons";
 
 export default function CategoryCard({ category }) {
-  const Icon = category.icon;
+  const Icon = getCategoryIcon(category.slug);
+  const countLabel =
+    category.courseCount === 1
+      ? "1 Course"
+      : `${category.courseCount} Courses`;
 
   return (
     <Link
@@ -11,10 +17,20 @@ export default function CategoryCard({ category }) {
     >
       {/* Icon */}
       <div
-        className="flex h-14 w-14 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
+        className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl transition-transform duration-300 group-hover:scale-110"
         style={{ backgroundColor: `${category.color}1a` }}
       >
-        <Icon size={26} style={{ color: category.color }} strokeWidth={1.75} />
+        {category.iconUrl ? (
+          <Image
+            src={category.iconUrl}
+            alt={category.name}
+            width={32}
+            height={32}
+            className="h-8 w-8 object-contain"
+          />
+        ) : (
+          <Icon size={26} style={{ color: category.color }} strokeWidth={1.75} />
+        )}
       </div>
 
       {/* Text */}
@@ -22,7 +38,7 @@ export default function CategoryCard({ category }) {
         <h3 className="text-base font-bold text-(--text-primary)">
           {category.name}
         </h3>
-        <p className="mt-1 text-xs text-(--text-muted)">{category.count}</p>
+        <p className="mt-1 text-xs text-(--text-muted)">{countLabel}</p>
         <p className="mt-3 text-sm leading-relaxed text-(--text-secondary)">
           {category.description}
         </p>

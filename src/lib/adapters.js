@@ -98,6 +98,65 @@ export const normalizeEnrollment = (enrollment, progressByCourse) => {
   };
 };
 
+// ---------- Public catalog: Category / Course ----------
+
+// GET /categories, /categories/slug/:slug -> { _id, name, slug, description, icon:{url}, color, courseCount }
+export const normalizeCategory = (category) => ({
+  id: idOf(category),
+  slug: category?.slug ?? "",
+  name: category?.name ?? "",
+  description: category?.description ?? "",
+  color: category?.color || "#7d7f4c",
+  iconUrl: resolveImageUrl(category?.icon),
+  courseCount: Number(category?.courseCount) || 0,
+  href: category?.slug ? `/courses/${category.slug}` : "/courses",
+});
+
+// GET /courses, /courses/slug/:slug -> populated category + instructor
+export const normalizeCourse = (course) => {
+  const category =
+    course?.category && typeof course.category === "object"
+      ? course.category
+      : null;
+  const instructor = course?.instructor;
+
+  return {
+    id: idOf(course),
+    slug: course?.slug ?? "",
+    title: course?.title ?? "Untitled course",
+    description: course?.description ?? "",
+    instructor: typeof instructor === "object" ? instructor?.name ?? "" : "",
+    instructorAvatar:
+      typeof instructor === "object" ? resolveImageUrl(instructor?.avatar) : "",
+    level: course?.level ?? "beginner",
+    language: course?.language ?? "",
+    price: Number(course?.price) || 0,
+    discountPrice:
+      course?.discountPrice != null ? Number(course.discountPrice) : null,
+    isFree: Boolean(course?.isFree),
+    rating: Number(course?.rating) || 0,
+    students: Number(course?.students) || 0,
+    totalDuration: Number(course?.totalDuration) || 0,
+    totalLectures: Number(course?.totalLectures) || 0,
+    requirements: Array.isArray(course?.requirements)
+      ? course.requirements
+      : [],
+    whatYouWillLearn: Array.isArray(course?.whatYouWillLearn)
+      ? course.whatYouWillLearn
+      : [],
+    image: pickCourseImage(course),
+    category: category
+      ? {
+          id: idOf(category),
+          name: category.name ?? "",
+          slug: category.slug ?? "",
+          color: category.color || "#7d7f4c",
+          iconUrl: resolveImageUrl(category.icon),
+        }
+      : null,
+  };
+};
+
 // ---------- Lesson ----------
 
 // Access na thakle backend video: null ar locked: true pathay

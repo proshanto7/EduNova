@@ -17,6 +17,25 @@ export const formatTotalDuration = (seconds) => {
   return h ? `${h}h ${m}m` : `${m}m`;
 };
 
+// course object { price, discountPrice, isFree } -> "Free" | "$49" | "$39.99"
+export const formatPrice = (course) => {
+  if (!course) return "";
+  if (course.isFree) return "Free";
+
+  const raw = course.discountPrice ?? course.price;
+  const price = Number(raw);
+  if (!Number.isFinite(price)) return "";
+  if (price === 0) return "Free";
+
+  return `$${Number.isInteger(price) ? price : price.toFixed(2)}`;
+};
+
+// students count -> "12,400"
+export const formatCount = (value) => {
+  const n = Number(value) || 0;
+  return n.toLocaleString("en-US");
+};
+
 export const formatDate = (value) => {
   if (!value) return "";
   const date = new Date(value);

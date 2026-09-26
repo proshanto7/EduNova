@@ -26,15 +26,15 @@ export const verifyEmailOtp = (data) =>
 export const resendVerification = (data) =>
   apiRequest("/auth/resend-verification", "POST", data);
 
-// Step 1: email → OTP পাঠানো
+// Step 1: email → OTP send
 export const forgotPassword = (data) =>
   apiRequest("/auth/forgot-password", "POST", data);
 
-// Step 2: email + OTP → resetToken পাওয়া (🆕 আগে ছিল না)
+// Step 2: email + OTP → resetToken send
 export const verifyResetOtp = (data) =>
   apiRequest("/auth/verify-reset-otp", "POST", data);
 
-// Step 3: resetToken + newPassword → password change (🔧 signature বদলানো, token আর URL param না)
+// Step 3: resetToken + newPassword → password change
 export const resetPassword = (data) =>
   apiRequest("/auth/reset-password", "POST", data);
 
@@ -49,7 +49,7 @@ export const changePassword = (data) =>
 export const deactivateMe = () => apiRequest("/auth/me", "DELETE");
 
 // ======================================================
-// USERS - ADMIN (🔧 prefix /user থেকে /auth এ বদলানো)
+// USERS - ADMIN ONLY
 // ======================================================
 
 export const getAllUsers = (params = {}) =>
@@ -86,9 +86,6 @@ export const updateCategory = (id, data) => {
   return apiRequest(`/categories/${id}`, "PATCH", data);
 };
 
-export const deleteCategory = (id) => {
-  return apiRequest(`/categories/${id}`, "DELETE");
-};
 
 // ======================================================
 // COURSES
@@ -106,18 +103,6 @@ export const getCourseBySlug = (slug) => {
   return apiRequest(`/courses/slug/${slug}`);
 };
 
-export const createCourse = (data) => {
-  return apiRequest("/courses", "POST", data);
-};
-
-export const updateCourse = (id, data) => {
-  return apiRequest(`/courses/${id}`, "PATCH", data);
-};
-
-export const deleteCourse = (id) => {
-  return apiRequest(`/courses/${id}`, "DELETE");
-};
-
 // ======================================================
 // LESSONS
 // ======================================================
@@ -130,17 +115,6 @@ export const getLesson = (id) => {
   return apiRequest(`/lesson/${id}`);
 };
 
-export const createLesson = (data) => {
-  return apiRequest("/lesson", "POST", data);
-};
-
-export const updateLesson = (id, data) => {
-  return apiRequest(`/lesson/${id}`, "PATCH", data);
-};
-
-export const deleteLesson = (id) => {
-  return apiRequest(`/lesson/${id}`, "DELETE");
-};
 
 // ======================================================
 // ENROLLMENTS
@@ -150,9 +124,6 @@ export const enrollStudent = (data) => {
   return apiRequest("/enrollment", "POST", data);
 };
 
-export const revokeEnrollment = (id) => {
-  return apiRequest(`/enrollment/${id}/revoke`, "PATCH");
-};
 
 export const getCourseEnrollments = (courseId) => {
   return apiRequest(`/enrollment/course/${courseId}`);
