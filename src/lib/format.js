@@ -27,7 +27,7 @@ export const formatPrice = (course) => {
   if (!Number.isFinite(price)) return "";
   if (price === 0) return "Free";
 
-  return `$${Number.isInteger(price) ? price : price.toFixed(2)}`;
+  return `TK. ${Number.isInteger(price) ? price : price.toFixed(2)}`;
 };
 
 // students count -> "12,400"
