@@ -68,7 +68,7 @@ export default function CourseCard({ course, accentColor }) {
             </span>
             {course.discountPrice != null && !course.isFree && (
               <span className="text-xs text-(--text-muted) line-through">
-                ${course.price}
+                TK.{course.price}
               </span>
             )}
           </span>
