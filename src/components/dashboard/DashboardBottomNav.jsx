@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Home, BookOpen, User } from "lucide-react";
 
 const BOTTOM_NAV_ITEMS = [
-  { key: "home", label: "Home", href: "/dashboard", icon: Home },
+  { key: "home", label: "Home", href: "/", icon: Home },
   { key: "courses", label: "My Course", href: "/dashboard/courses", icon: BookOpen },
   { key: "profile", label: "Profile", href: "/dashboard/settings", icon: User },
 ];

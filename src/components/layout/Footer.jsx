@@ -4,12 +4,15 @@ import { FOOTER_DATA } from "@/data/footer";
 import { getCategories } from "@/lib/api";
 import { unwrap } from "@/lib/auth-utils";
 import { normalizeCategory } from "@/lib/adapters";
+import FooterBottomBar from "@/components/layout/FooterBottomBar";
 
 async function fetchFooterCategories() {
   try {
     const res = await getCategories({ limit: 5 });
     const data = unwrap(res);
+
     const list = Array.isArray(data?.categories) ? data.categories : [];
+
     return list.map(normalizeCategory).map((category) => ({
       label: category.name,
       href: category.href,
@@ -24,8 +27,8 @@ export default async function Footer() {
   const categories = await fetchFooterCategories();
 
   return (
-<footer className="border-t border-(--border) bg-(--footer-bg)">
-        {/* Newsletter Strip */}
+    <footer className="border-t border-(--border) bg-(--footer-bg)">
+      {/* Newsletter Strip */}
       <div className="border-b border-(--border) px-6 py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 sm:flex-row">
           <div>
@@ -153,9 +156,7 @@ export default async function Footer() {
                       href={item.href}
                       target={isExternal ? "_blank" : undefined}
                       rel={
-                        isExternal
-                          ? "noopener noreferrer"
-                          : undefined
+                        isExternal ? "noopener noreferrer" : undefined
                       }
                       className="group flex items-start gap-2.5 text-sm text-(--text-secondary) transition-colors hover:text-(--accent)"
                     >
@@ -171,26 +172,7 @@ export default async function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-(--border) px-6 py-6">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 sm:flex-row">
-          <p className="text-xs text-(--text-muted)">
-            © {year} {FOOTER_DATA.brand.name}. All rights reserved.
-          </p>
-
-          <div className="flex items-center gap-5">
-            {FOOTER_DATA.legal.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-xs text-(--text-muted) transition-colors hover:text-(--accent)"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
+      <FooterBottomBar year={year} />
     </footer>
   );
 }
